@@ -5,6 +5,8 @@ const morgan = require("morgan");
 
 const DBconnection = require("./config/db");
 
+const errorHandler = require('./middleware/error')
+
 const categoryRoutes = require('./routes/categories')
 
 dotenv.config({ path: "./config/.env" });
@@ -25,6 +27,8 @@ if (process.env.NODE_ENV === "development") {
 // });
 
 app.use('/api/v1/categories', categoryRoutes)
+
+app.use(errorHandler)
 
 // use env
 const PORT = process.env.PORT || 5000;
